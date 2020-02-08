@@ -6,8 +6,7 @@ namespace StandartUpdate
 {
     public class Sector : MonoBehaviour, ICreateObjects
     {
-        [SerializeField] private Level _level;
-        //[SerializeField] private GameObject _prefabLevel;
+        [SerializeField] private Level _level;        
 
         private List<Level> _levelList = new List<Level>();
 

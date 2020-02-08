@@ -7,8 +7,7 @@ namespace StandartUpdate
 {
     public class Level : MonoBehaviour, ICreateObjects
     {
-        [SerializeField] private Transform _cell;
-        //[SerializeField] private Vector3 _cellOffSetPosition;
+        [SerializeField] private Transform _cell;        
 
         [SerializeField] private float _cellOffSetPositionZ;
         public float OffsetPosition => _cellOffSetPositionZ;
@@ -19,8 +18,7 @@ namespace StandartUpdate
 
         private void Update()
         {
-            //Debug.Log(Time.deltaTime);
-            
+            //Debug.Log(Time.deltaTime);            
 
             if (_objectsCount < 20)
             {
@@ -33,7 +31,6 @@ namespace StandartUpdate
                     OnLevelFirstStepDone(this);
                 }
             }
-
         }
 
         public void CreateObjectWithOffset()

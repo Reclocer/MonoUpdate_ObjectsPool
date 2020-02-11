@@ -1,25 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class Watermelon : MonoBehaviour, IStickable
+namespace StandartUpdate
 {
-    [SerializeField] private int _maxStickObjects = 10;
-    public int MaxStickObjects => _maxStickObjects;
-
-    private List<Rigidbody> _listObjects = new List<Rigidbody>();
-
-    private void Update()
+    public class Watermelon : MonoBehaviour, IStickable
     {
-        if (_listObjects.Count > _maxStickObjects)
+        [SerializeField] private int _maxStickObjects = 10;
+        public int MaxStickObjects => _maxStickObjects;
+
+        private List<Rigidbody> _listObjects = new List<Rigidbody>();
+
+        private void Update()
         {
-            transform.DetachChildren();
+            if (_listObjects.Count > _maxStickObjects)
+            {
+                transform.DetachChildren();
+
+                foreach (Rigidbody rigidbody in _listObjects)
+                {
+                    rigidbody.useGravity = true;
+                    _listObjects.Remove(rigidbody);
+                }
+            }
+        }
+
+        public void StickObject(Rigidbody rigidbody)
+        {
+            _listObjects.Add(rigidbody);
+            rigidbody.gameObject.transform.SetParent(transform);
         }
     }
-
-    public void StickObject(Rigidbody rigidbody)
-    {
-        _listObjects.Add(rigidbody);
-        rigidbody.gameObject.transform.SetParent(transform);
-    }   
 }

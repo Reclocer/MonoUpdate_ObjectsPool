@@ -8,15 +8,17 @@ namespace StandartUpdate
     public class Crossbow : MonoBehaviour
     {
         [SerializeField] private ArrowFactory _arrowFactory;
+        [SerializeField] private Transform _arrowStartPosition;
         
         void Start()
         {            
-            InvokeRepeating("CreateArrow", 1,1);                        
+            InvokeRepeating("CreateArrow", 0,2);                        
         }
 
         private void CreateArrow()
         {
             ArrowBase arrow = _arrowFactory.CreateArrow<Arrow>();
+            arrow.transform.position = _arrowStartPosition.position;
             ShotArrow(arrow);
         }
 

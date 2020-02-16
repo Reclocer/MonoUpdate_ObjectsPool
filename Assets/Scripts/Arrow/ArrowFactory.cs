@@ -14,7 +14,7 @@ namespace StandartUpdate
             {
                 if (arrow.GetType() == typeof(T))
                 {
-                    return Instantiate(arrow, transform.position + new Vector3(1, 0.5f, 0), transform.rotation, transform);
+                    return Instantiate(arrow, transform.position, transform.rotation, transform);
                 }
             }
 

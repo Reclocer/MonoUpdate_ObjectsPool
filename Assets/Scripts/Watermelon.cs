@@ -40,12 +40,20 @@ namespace StandartUpdate
             //}
         }
 
+        /// <summary>
+        /// Rigidbody object stick to watermelon 
+        /// </summary>
+        /// <param name="rigidbody"></param>
         public void StickObject(Rigidbody rigidbody)
         {
             _listObjects.Add(rigidbody);
             rigidbody.gameObject.transform.SetParent(transform);            
         }
 
+        /// <summary>
+        /// Rigidbody object unstick 
+        /// </summary>
+        /// <param name="rigidbody"></param>
         public void UnStick(Rigidbody rigidbody)
         {
             _listObjects.Remove(rigidbody);

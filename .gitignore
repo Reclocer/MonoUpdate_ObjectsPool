@@ -57,3 +57,6 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# Trash scripts
+[Aa]ssets/Scripts/Trash_gitIgnore*

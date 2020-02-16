@@ -2,5 +2,5 @@
 {
     float OffsetPosition { get; }
 
-    void CreateObjectWithOffset();
+    void Create();
 }

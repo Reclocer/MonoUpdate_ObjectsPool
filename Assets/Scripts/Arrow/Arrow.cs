@@ -13,7 +13,7 @@ namespace StandartUpdate
 
         private void Update()
         {            
-            CheckStickableObject();            
+            CheckStickableObject();             
         }
 
         private void CheckStickableObject()

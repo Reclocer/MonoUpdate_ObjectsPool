@@ -6,40 +6,40 @@ namespace StandartUpdate
 {
     public class Sector : MonoBehaviour, ICreateObjects
     {
-        [SerializeField] private Level _level;        
-
-        private List<Level> _levelList = new List<Level>();
+        [SerializeField] private Level _level;
+        //private List<Level> _levelList = new List<Level>();
 
         [SerializeField] private float _offSetPosition;
         public float OffsetPosition => _offSetPosition;
+        private float _newLevelPosition;
 
         private int _levelCount = 0;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            _levelList.Add(_level);
-            _level.OnLevelFirstStepDone += (level) => { CreateObjectWithOffset(); };
-            _level.OnLevelFirstStepDone += LevelEventComeOff;
-            CreateObjectWithOffset();
+            Create();            
         }
 
-        public void CreateObjectWithOffset()
+        /// <summary>
+        /// Create level prefab. Increment _levelCount and _newLevelPosition. 
+        /// </summary>
+        public void Create()
         {
-            Vector3 newLevelPosition = new Vector3(0, transform.position.y + _offSetPosition, 0);
+            Vector3 newLevelPosition = new Vector3(0, transform.position.y + _newLevelPosition, 0);
             Level newLevel = GameObject.Instantiate(_level, newLevelPosition, Quaternion.identity, transform);
-            _levelList.Add(newLevel);
+            //_levelList.Add(newLevel);
 
-            newLevel.OnLevelFirstStepDone += (level) => { CreateObjectWithOffset(); };
+            newLevel.OnLevelFirstStepDone += (level) => { Create(); };
             newLevel.OnLevelFirstStepDone += LevelEventComeOff;
 
             _levelCount++;
-            _offSetPosition += 4;
+            _newLevelPosition += _offSetPosition;
         }
 
         private void LevelEventComeOff(Level level)
         {
-            level.OnLevelFirstStepDone -= (level1) => { CreateObjectWithOffset(); };
+            level.OnLevelFirstStepDone -= (level1) => { Create(); };
             level.OnLevelFirstStepDone -= LevelEventComeOff;
         }
     }

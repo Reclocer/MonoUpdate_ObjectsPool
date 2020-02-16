@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StandartUpdate
+namespace MonoUpdate
 {
     [RequireComponent(typeof(ArrowFactory))]
-    public class Crossbow : MonoBehaviour
+    public class Crossbow : MonoUpdateClass
     {
         [SerializeField] private ArrowFactory _arrowFactory;
         [SerializeField] private Transform _arrowStartPosition;
-        
-        void Start()
-        {            
-            InvokeRepeating("CreateArrow", 0,2);                        
+
+        private void MonoStartFunc()
+        {
+            InvokeRepeating("CreateArrow", 0, 2);
         }
 
         private void CreateArrow()
@@ -23,8 +23,8 @@ namespace StandartUpdate
         }
 
         private void ShotArrow(ArrowBase arrow)
-        {            
+        {
             arrow.Rigidbody.AddRelativeForce(1000, 0, 0);
-        }        
+        }
     }
 }

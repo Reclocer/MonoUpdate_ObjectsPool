@@ -3,37 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace StandartUpdate
-{
-    [RequireComponent(typeof(Rigidbody))]
+{        
     public class Arrow : ArrowBase 
     {
-        [SerializeField] private float _distanceToStick = 1;// in base
-        private Rigidbody _rigidbody;                       // in base
-
-        private void Start()// in base
+        protected override void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+            base.Awake();            
         }
 
         private void Update()
-        {
-            CheckStickableObject();
+        {            
+            CheckStickableObject();            
         }
 
         private void CheckStickableObject()
         {
             RaycastHit hit;
+            Debug.DrawRay(transform.position, transform.right, Color.red);
 
-            if(Physics.Raycast(transform.position, transform.forward, out hit, _distanceToStick))
+            if(Physics.Raycast(transform.position, transform.right, out hit, _distanceToStick))
             {
                 IStickable stickable = hit.collider.GetComponent<IStickable>();
 
-                if(stickable != null)
-                {
-                    stickable.StickObject(_rigidbody);
+                if(stickable != null && stickable != _lastSticable)                
+                {    
+                    // Rigidbody functions disable                      
                     _rigidbody.useGravity = false;
+                    _rigidbody.angularVelocity = Vector3.zero;
+                    _rigidbody.velocity = Vector3.zero;
+
+                    _fixedJoint = gameObject.AddComponent<FixedJoint>();
+                    _fixedJoint.connectedBody = stickable.SticableBody; 
+
+                    stickable.StickObject(_rigidbody);
+                    _lastSticable = stickable;
                 }
             }
-        }
+            else if (_lastSticable != null)
+            {
+                _rigidbody.useGravity = true;
+                _lastSticable.UnStick(_rigidbody);
+                Destroy(_fixedJoint);             //!!!!!!                
+            }
+        }       
     }
 }

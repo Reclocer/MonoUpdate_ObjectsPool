@@ -5,31 +5,51 @@ using UnityEngine;
 
 namespace StandartUpdate
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Watermelon : MonoBehaviour, IStickable
     {
-        [SerializeField] private int _maxStickObjects = 10;
+        [SerializeField] private int _maxStickObjects = 3;
         public int MaxStickObjects => _maxStickObjects;
+        //private int _stickObjectsNow = 0;
+
+        private Rigidbody _rigidbody;
+        public Rigidbody SticableBody => _rigidbody;       
 
         private List<Rigidbody> _listObjects = new List<Rigidbody>();
 
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+            //_stickObjectsNow = _maxStickObjects; //!!!!!!
+
+        }
+
         private void Update()
         {
-            if (_listObjects.Count > _maxStickObjects)
-            {
-                transform.DetachChildren();
+            //if (_listObjects.Count > _stickObjectsNow)
+            //{
+            //    transform.DetachChildren();
 
-                foreach (Rigidbody rigidbody in _listObjects)
-                {
-                    rigidbody.useGravity = true;
-                    _listObjects.Remove(rigidbody);
-                }
-            }
+            //    foreach (Rigidbody rigidbody in _listObjects)
+            //    {
+            //        rigidbody.useGravity = true;
+            //        _listObjects.Remove(rigidbody);
+            //    }
+
+            //    _stickObjectsNow += _maxStickObjects;
+            //}
         }
 
         public void StickObject(Rigidbody rigidbody)
         {
             _listObjects.Add(rigidbody);
-            rigidbody.gameObject.transform.SetParent(transform);
+            rigidbody.gameObject.transform.SetParent(transform);            
+        }
+
+        public void UnStick(Rigidbody rigidbody)
+        {
+            _listObjects.Remove(rigidbody);
+            rigidbody.gameObject.transform.parent = null;
         }
     }
 }

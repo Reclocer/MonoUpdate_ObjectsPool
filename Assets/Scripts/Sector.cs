@@ -29,10 +29,12 @@ namespace StandartUpdate
             Vector3 newLevelPosition = new Vector3(0, transform.position.y + _offSetPosition, 0);
             Level newLevel = GameObject.Instantiate(_level, newLevelPosition, Quaternion.identity, transform);
             _levelList.Add(newLevel);
+
             newLevel.OnLevelFirstStepDone += (level) => { CreateObjectWithOffset(); };
             newLevel.OnLevelFirstStepDone += LevelEventComeOff;
+
             _levelCount++;
-            _offSetPosition += 3;
+            _offSetPosition += 4;
         }
 
         private void LevelEventComeOff(Level level)

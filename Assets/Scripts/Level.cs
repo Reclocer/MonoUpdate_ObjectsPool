@@ -22,8 +22,8 @@ namespace StandartUpdate
 
             if (_objectsCount < 20)
             {
-                Debug.Log("количество объектов " + _objectsCount);
-                Debug.Log(_cellOffSetPositionZ);
+                //Debug.Log("количество объектов " + _objectsCount);
+                //Debug.Log(_cellOffSetPositionZ);
                 CreateObjectWithOffset();
 
                 if (_objectsCount == 10)
@@ -40,7 +40,7 @@ namespace StandartUpdate
                                                   transform.position.z + _cellOffSetPositionZ);
             GameObject.Instantiate(_cell, newCellPosition, Quaternion.identity, transform);
             _objectsCount++;
-            _cellOffSetPositionZ += 2;
+            _cellOffSetPositionZ += 4;
         }
     }
 }

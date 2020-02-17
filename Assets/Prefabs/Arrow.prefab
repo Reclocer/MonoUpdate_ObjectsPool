@@ -88,8 +88,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6290986668816058397}
   - component: {fileID: 6290986668816058387}
-  - component: {fileID: 6290986668816058386}
   - component: {fileID: 2026858266}
+  - component: {fileID: 5874068604362317558}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -128,20 +128,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6290986668816058386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6290986668816058396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be48698029dcd3b4491b6b95438795fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _distanceToStick: 0.8
-  _rigidbody: {fileID: 6290986668816058387}
 --- !u!65 &2026858266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,3 +141,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5874068604362317558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6290986668816058396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528a0750586b63541814e949db676ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceToStick: 0.8

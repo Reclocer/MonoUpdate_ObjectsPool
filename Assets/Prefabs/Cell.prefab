@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5533356423314617087}
-  - component: {fileID: 4522271561715856093}
-  - component: {fileID: 3015672447378550144}
+  - component: {fileID: 1160966755198423042}
+  - component: {fileID: 2047904502581529366}
   m_Layer: 0
   m_Name: Crossbow
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 7603657080388418592}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 21}
---- !u!114 &4522271561715856093
+--- !u!114 &1160966755198423042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,12 +43,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3555399439280194403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c5869288b42f547b6eeb918077d306, type: 3}
+  m_Script: {fileID: 11500000, guid: 5747995417fd72e49a528f6f4e0f7755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _listArows:
-  - {fileID: 6290986668816058386, guid: 3572aa492d971794db6e38ed5232f2ac, type: 3}
---- !u!114 &3015672447378550144
+  - {fileID: 5874068604362317558, guid: 3572aa492d971794db6e38ed5232f2ac, type: 3}
+--- !u!114 &2047904502581529366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,10 +57,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3555399439280194403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e41602ae9a673441a71db5d37f4a2f9, type: 3}
+  m_Script: {fileID: 11500000, guid: b53a7db702cdc8642b0945278f4f83e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _arrowFactory: {fileID: 4522271561715856093}
+  _arrowFactory: {fileID: 1160966755198423042}
   _arrowStartPosition: {fileID: 3982787750611912709}
 --- !u!1 &5472335464860696572
 GameObject:
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 7603657081204134090}
   - component: {fileID: 5105146311300747129}
   - component: {fileID: 7959734720165192900}
-  - component: {fileID: 387104870961218892}
+  - component: {fileID: 4461701689635402940}
   m_Layer: 0
   m_Name: Watermelon
   m_TagString: Untagged
@@ -575,7 +575,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
---- !u!114 &387104870961218892
+--- !u!114 &4461701689635402940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7603657081204134091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 912fede190329df47b2dfc08147e0ec7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0823cd44549b6da489f722ea83fe21a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxStickObjects: 10

@@ -28,7 +28,7 @@ namespace MonoUpdate
         {
             //Debug.Log(Time.deltaTime);            
 
-            if (_objectsCount < 20)
+            if (_objectsCount < 1)
             {                               
                 Create();
                 _objectsCount++;

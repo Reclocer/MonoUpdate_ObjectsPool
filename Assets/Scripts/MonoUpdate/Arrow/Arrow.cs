@@ -6,15 +6,25 @@ namespace MonoUpdate
 {
     public class Arrow : ArrowBase
     {        
-        public override void MonoAwakeFunc()
+        //public override void MonoAwakeFunc()
+        private void Awake()
         {
-            base.MonoAwakeFunc();
-            _rigidbody = GetComponent<Rigidbody>();
+            base.MonoAwakeFunc();            
         }
 
         public override void MonoUpdateFunc()
         {
             CheckStickableObject();
+        }
+
+        public override Rigidbody GetRigidbody()
+        {
+            return base.GetRigidbody();
+        }
+
+        public override void SetRigidbody(Rigidbody rigidbody)
+        {
+            base.SetRigidbody(rigidbody);
         }
 
         private void CheckStickableObject()

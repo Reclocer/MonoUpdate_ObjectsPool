@@ -17,14 +17,14 @@ namespace MonoUpdate
 
         private List<Rigidbody> _listObjects = new List<Rigidbody>();
 
-        private void MonoAwakeFunc()
+        public override void MonoAwakeFunc()
         {
+            base.MonoAwakeFunc();
             _rigidbody = GetComponent<Rigidbody>();
             //_stickObjectsNow = _maxStickObjects; //!!!!!!
-
         }
 
-        private void MonoUpdateFunc()
+        public override void MonoUpdateFunc()
         {
             //if (_listObjects.Count > _stickObjectsNow)
             //{

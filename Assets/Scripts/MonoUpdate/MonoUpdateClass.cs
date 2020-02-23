@@ -15,30 +15,46 @@ namespace MonoUpdate
 
         //Logic
         public static List<MonoUpdateClass> ListUpdates = new List<MonoUpdateClass>();
-
+        
 
         //Initialization
-        public void MonoAwakeFunc()
+        public virtual void MonoAwakeFunc()
         {
 
         }
 
-        public void MonoStartFunc()
+        private void OnEnable()
+        {
+            ListAwakes.Add(this);
+            ListStarts.Add(this);
+            ListFixedUpdates.Add(this);
+            ListUpdates.Add(this);
+        }
+
+        public virtual void MonoStartFunc()
         {
 
         }
 
         //Physics
-        public void MonoFixedUpdateFunc()
+        public virtual void MonoFixedUpdateFunc()
         {
 
         }
        
 
         //Logic
-        public void MonoUpdateFunc()
+        public virtual void MonoUpdateFunc()
         {
+            
+        }
 
+        private void OnDisable()
+        {
+            ListAwakes.Remove(this);
+            ListStarts.Remove(this);
+            ListFixedUpdates.Remove(this);
+            ListUpdates.Remove(this);
         }
     }
 }

@@ -17,14 +17,14 @@ namespace MonoUpdate
 
         public event Action<Level> OnLevelFirstStepDone = (level) => { };
 
-        private void MonoStartFunc()
+        public override void MonoStartFunc()
         {
             Create();
             _objectsCount++;
             _newCellPosition += _cellOffSetPositionZ;
         }
 
-        private void MonoUpdateFunc()
+        public override void MonoUpdateFunc()
         {
             //Debug.Log(Time.deltaTime);            
 

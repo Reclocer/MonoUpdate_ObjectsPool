@@ -21,8 +21,7 @@ namespace StandartUpdate
 
         protected virtual void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            Transform parentTransform = GetComponentInParent<Transform>();
+            _rigidbody = GetComponent<Rigidbody>();            
         }
     }
 }

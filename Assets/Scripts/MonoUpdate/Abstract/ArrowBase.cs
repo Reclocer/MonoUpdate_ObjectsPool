@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MonoUpdate
 {
     [RequireComponent(typeof(Rigidbody))]
-    public abstract class ArrowBase : MonoUpdateClass
+    public class ArrowBase : MonoUpdateClass
     {
         [SerializeField] protected float _distanceToStick = 1;
         protected IStickable _lastSticable;
@@ -19,10 +19,10 @@ namespace MonoUpdate
             set { _rigidbody = value; }
         }
 
-        protected virtual void MonoAwakeFunc()
+        public override void MonoAwakeFunc()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            Transform parentTransform = GetComponentInParent<Transform>();
+            base.MonoAwakeFunc();
+            
         }
     }
 }

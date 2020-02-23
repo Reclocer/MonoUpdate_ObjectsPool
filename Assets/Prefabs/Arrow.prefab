@@ -154,3 +154,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _distanceToStick: 0.8
+  _rigidbody: {fileID: 6290986668816058387}

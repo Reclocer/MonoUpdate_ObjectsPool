@@ -5,13 +5,14 @@ using UnityEngine;
 namespace MonoUpdate
 {
     public class Arrow : ArrowBase
-    {
-        protected override void MonoAwakeFunc()
+    {        
+        public override void MonoAwakeFunc()
         {
             base.MonoAwakeFunc();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void MonoUpdateFunc()
+        public override void MonoUpdateFunc()
         {
             CheckStickableObject();
         }

@@ -7,6 +7,7 @@ namespace StandartUpdate
 {
     public class Level : MonoBehaviour, ICreateObjects
     {
+        public static int CountOfCrossbowmen = 0;
         [SerializeField] private Transform _cell;        
 
         [SerializeField] private float _cellOffSetPositionZ;
@@ -34,7 +35,7 @@ namespace StandartUpdate
                 _objectsCount++;
                 _newCellPosition += _cellOffSetPositionZ;                
 
-                if (_objectsCount == 10 && Time.deltaTime < 0.02f)                
+                if (_objectsCount == 100 && Time.deltaTime < 0.02f)                
                 {
                     OnLevelFirstStepDone(this);
                 }
@@ -49,7 +50,9 @@ namespace StandartUpdate
             Vector3 newCellPosition = new Vector3(transform.position.x, 
                                                   transform.position.y, 
                                                   transform.position.z + _newCellPosition);
-            GameObject.Instantiate(_cell, newCellPosition, Quaternion.identity, transform);            
+            GameObject.Instantiate(_cell, newCellPosition, Quaternion.identity, transform);
+            CountOfCrossbowmen++;
+            Debug.Log("Count of crossbowmen " + CountOfCrossbowmen);
         }
     }
 }

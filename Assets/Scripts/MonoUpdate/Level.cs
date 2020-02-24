@@ -7,6 +7,7 @@ namespace MonoUpdate
 {
     public class Level : MonoUpdateClass, ICreateObjects
     {
+        public static int CountOfCrossbowmen = 0;//!!!!!!!!!!!!!
         [SerializeField] private Transform _cell;        
 
         [SerializeField] private float _cellOffSetPositionZ;
@@ -49,7 +50,9 @@ namespace MonoUpdate
             Vector3 newCellPosition = new Vector3(transform.position.x, 
                                                   transform.position.y, 
                                                   transform.position.z + _newCellPosition);
-            GameObject.Instantiate(_cell, newCellPosition, Quaternion.identity, transform);            
+            GameObject.Instantiate(_cell, newCellPosition, Quaternion.identity, transform);
+            CountOfCrossbowmen++;//!!!!!!!!!!!!!!!!!!
+            Debug.Log("Count of Crossbowmen "+CountOfCrossbowmen);//!!!!!!!!!!!!!!
         }
     }
 }

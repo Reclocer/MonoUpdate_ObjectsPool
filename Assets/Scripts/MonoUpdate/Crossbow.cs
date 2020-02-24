@@ -9,20 +9,16 @@ namespace MonoUpdate
     {
         [SerializeField] private ArrowFactory _arrowFactory;
         [SerializeField] private Transform _arrowStartPosition;
-        //[SerializeField] private int _maxCountArrowsInPool = 2;
-        private int _maxCountArrowsInPool = 9;//!!!!!!!!!!!!!!!!!!!!!!!!
+        [SerializeField] private int _maxCountArrowsInPool = 20;        
         [SerializeField] private const float _shotIntervalTime = 1f;
-        private float _time;
+        private float _time;        
         private Queue<ArrowBase> _queueArrowBases;
+        private Queue<ArrowBase> _queueUnstickedArrowBases;
 
-        //public override void MonoStartFunc()
-        //{
-        //    InvokeRepeating("CreateArrow", 0, 2);
-        //}
-
-         void Awake()
+        private void Awake()
         {
-            _queueArrowBases = new Queue<ArrowBase>(_maxCountArrowsInPool);
+            _queueArrowBases          = new Queue<ArrowBase>(_maxCountArrowsInPool);
+            _queueUnstickedArrowBases = new Queue<ArrowBase>(_maxCountArrowsInPool);
             ArrowBase arrow;
 
             for (int i = 0; i < _maxCountArrowsInPool; i++)
@@ -37,11 +33,8 @@ namespace MonoUpdate
             if(_time <= 0)
             {
                 _time = _shotIntervalTime;
-                Debug.Log(_queueArrowBases.Count);
-                ArrowBase arrow = _queueArrowBases.Peek();
-                _queueArrowBases.Dequeue();
-                ShotArrow(arrow);
-                _queueArrowBases.Enqueue(arrow);
+                ArrowBase arrow = ChoiceNextArrow();
+                ShotArrow(arrow);               
             }
             else
             {
@@ -52,27 +45,51 @@ namespace MonoUpdate
         private ArrowBase CreateArrow()
         {
             ArrowBase arrow = _arrowFactory.CreateArrow<Arrow>();
+            arrow.OnUnStick += AddArrowToQueueUnstick;
             arrow.gameObject.SetActive(false);
             return arrow;           
         }
 
+        private void AddArrowToQueueUnstick(ArrowBase arrow)
+        {
+            _queueUnstickedArrowBases.Enqueue(arrow);
+        }
+
+        private ArrowBase ChoiceNextArrow()
+        {
+            ArrowBase arrow;
+
+            if (_queueUnstickedArrowBases.Count != 0)
+            {                
+                arrow = _queueUnstickedArrowBases.Peek();
+                _queueUnstickedArrowBases.Dequeue();
+                return arrow;
+            }
+            else
+            {
+                arrow = _queueArrowBases.Peek();
+                _queueArrowBases.Dequeue();
+                _queueArrowBases.Enqueue(arrow);
+                return arrow;
+            }
+        }
+
         private void ShotArrow(ArrowBase arrow)
         {
-            arrow.gameObject.SetActive(true);
-
+            arrow.gameObject.SetActive(true);                        
             Rigidbody arrowRigidbody = arrow.GetRigidbody();
-            
-            arrowRigidbody.angularVelocity = Vector3.zero;
-            arrowRigidbody.velocity = Vector3.zero;
-            arrowRigidbody.inertiaTensor = new Vector3(1,1,1);
 
-            arrow.transform.SetParent(this.transform);
+            arrow.transform.SetParent(transform);
             arrow.transform.rotation = transform.rotation;
-            
             arrow.transform.position = _arrowStartPosition.position;
 
+            arrowRigidbody.angularVelocity = Vector3.zero;
+            arrowRigidbody.velocity        = Vector3.zero;
+
+            arrow.StickStatus = StickStatus.None;
+
             arrowRigidbody.AddRelativeForce(1000, 0, 0);
-            //arrow.SetRigidbody(arrowRigidbody);
+            arrow.SetRigidbody(arrowRigidbody);
         }
     }
 }

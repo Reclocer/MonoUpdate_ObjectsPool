@@ -17,7 +17,7 @@ namespace MonoUpdate
 
         public event Action<Level> OnLevelFirstStepDone = (level) => { };
 
-        public override void MonoStartFunc()
+        private void Start()
         {
             Create();
             _objectsCount++;
@@ -28,7 +28,7 @@ namespace MonoUpdate
         {
             //Debug.Log(Time.deltaTime);            
 
-            if (_objectsCount < 1)
+            if (_objectsCount < 20)
             {                               
                 Create();
                 _objectsCount++;

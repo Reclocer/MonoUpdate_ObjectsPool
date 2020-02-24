@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _arrowFactory: {fileID: 1160966755198423042}
   _arrowStartPosition: {fileID: 3982787750611912709}
+  _maxCountArrowsInPool: 5
 --- !u!1 &5472335464860696572
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,10 +18,8 @@ namespace MonoUpdate
         private List<Rigidbody> _listObjects = new List<Rigidbody>();
 
         private void Awake()
-        {
-            base.MonoAwakeFunc();
+        {            
             _rigidbody = GetComponent<Rigidbody>();
-            Debug.Log(_rigidbody);
             //_stickObjectsNow = _maxStickObjects; //!!!!!!
         }
 

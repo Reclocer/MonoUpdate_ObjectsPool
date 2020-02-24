@@ -5,11 +5,10 @@ using UnityEngine;
 namespace MonoUpdate
 {
     public class Arrow : ArrowBase
-    {        
-        //public override void MonoAwakeFunc()
-        private void Awake()
+    {         
+        public override void Awake()
         {
-            base.MonoAwakeFunc();            
+            base.Awake();            
         }
 
         public override void MonoUpdateFunc()
@@ -17,45 +16,27 @@ namespace MonoUpdate
             CheckStickableObject();
         }
 
+        /// <summary>
+        /// Get Rigidbody
+        /// </summary>
+        /// <returns></returns>
         public override Rigidbody GetRigidbody()
         {
             return base.GetRigidbody();
         }
 
+        /// <summary>
+        /// Set Rigidbody
+        /// </summary>
+        /// <param name="rigidbody"></param>
         public override void SetRigidbody(Rigidbody rigidbody)
         {
             base.SetRigidbody(rigidbody);
         }
 
-        private void CheckStickableObject()
+        public override void CheckStickableObject()
         {
-            RaycastHit hit;
-            Debug.DrawRay(transform.position, transform.right, Color.red);
-
-            if (Physics.Raycast(transform.position, transform.right, out hit, _distanceToStick))
-            {
-                IStickable stickable = hit.collider.GetComponent<IStickable>();
-
-                if (stickable != null && stickable != _lastSticable)
-                {
-                    // Rigidbody functions disable                      
-                    _rigidbody.useGravity = false;
-                    _rigidbody.angularVelocity = Vector3.zero;
-                    _rigidbody.velocity = Vector3.zero;
-
-                    _fixedJoint = gameObject.AddComponent<FixedJoint>();
-                    _fixedJoint.connectedBody = stickable.SticableBody;
-
-                    stickable.StickObject(_rigidbody);
-                    _lastSticable = stickable;
-                }
-            }
-            else if (_lastSticable != null)
-            {
-                _rigidbody.useGravity = true;
-                _lastSticable.UnStick(_rigidbody);
-                Destroy(_fixedJoint);             //!!!!!!                
-            }
+            base.CheckStickableObject();
         }
     }
 }

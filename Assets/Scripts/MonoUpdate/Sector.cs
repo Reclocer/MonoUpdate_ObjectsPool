@@ -16,7 +16,7 @@ namespace MonoUpdate
         private int _levelCount = 0;
 
         // Start is called before the first frame update
-        public override void MonoStartFunc()
+        private void Start()
         {
             Create();            
         }

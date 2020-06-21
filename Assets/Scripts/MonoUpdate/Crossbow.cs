@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Corebin.Core.ObjectsPool.ObjectsQueue;
 using UnityEngine;
 
 namespace MonoUpdate
@@ -9,32 +8,36 @@ namespace MonoUpdate
     {
         [SerializeField] private ArrowFactory _arrowFactory;
         [SerializeField] private Transform _arrowStartPosition;
-        [SerializeField] private int _maxCountArrowsInPool = 20;        
         [SerializeField] private const float _shotIntervalTime = 1f;
-        private float _time;        
-        private Queue<ArrowBase> _queueArrowBases;
-        private Queue<ArrowBase> _queueUnstickedArrowBases;
+        private float _time;
+
+        private ObjectsPoolQueue<ArrowBase> _objectsPoolQueue;
 
         private void Awake()
         {
-            _queueArrowBases          = new Queue<ArrowBase>(_maxCountArrowsInPool);
-            _queueUnstickedArrowBases = new Queue<ArrowBase>(_maxCountArrowsInPool);
+            _objectsPoolQueue = new ObjectsPoolQueue<ArrowBase>(16);
             ArrowBase arrow;
 
-            for (int i = 0; i < _maxCountArrowsInPool; i++)
-            {                
+            for (int i = 0; i < 16; i++)
+            {
                 arrow = CreateArrow();
-                _queueArrowBases.Enqueue(arrow);
-            }            
+                _objectsPoolQueue.Enqueue(arrow);
+            }
         }
 
         public override void MonoUpdateFunc()
         {
-            if(_time <= 0)
+            if (_time <= 0)
             {
                 _time = _shotIntervalTime;
-                ArrowBase arrow = ChoiceNextArrow();
-                ShotArrow(arrow);               
+                ArrowBase arrow = _objectsPoolQueue.Dequeue();
+
+                if (arrow == null)
+                {
+                    arrow = CreateArrow();
+                }
+
+                ShotArrow(arrow);
             }
             else
             {
@@ -52,27 +55,8 @@ namespace MonoUpdate
 
         private void AddArrowToQueueUnstick(ArrowBase arrow)
         {
-            _queueUnstickedArrowBases.Enqueue(arrow);
-        }
-
-        private ArrowBase ChoiceNextArrow()
-        {
-            ArrowBase arrow;
-
-            if (_queueUnstickedArrowBases.Count != 0)
-            {                
-                arrow = _queueUnstickedArrowBases.Peek();
-                _queueUnstickedArrowBases.Dequeue();
-                return arrow;
-            }
-            else
-            {
-                arrow = _queueArrowBases.Peek();
-                _queueArrowBases.Dequeue();
-                _queueArrowBases.Enqueue(arrow);
-                return arrow;
-            }
-        }
+            _objectsPoolQueue.Enqueue(arrow);
+        }        
 
         private void ShotArrow(ArrowBase arrow)
         {

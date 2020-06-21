@@ -6,7 +6,7 @@ namespace MonoUpdate
 {
     public class Arrow : ArrowBase
     {         
-        public override void Awake()
+        protected override void Awake()
         {
             base.Awake();            
         }

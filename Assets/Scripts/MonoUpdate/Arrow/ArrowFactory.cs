@@ -18,6 +18,7 @@ namespace MonoUpdate
                 }
             }
 
+            Debug.LogWarning("ArrowFactory cant create arrow. Please add arrow to 'List Arrows' ");
             return null;
         }
     }

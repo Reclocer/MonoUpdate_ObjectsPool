@@ -6,7 +6,7 @@ using UnityEngine;
 namespace MonoUpdate
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class ArrowBase : MonoUpdateClass
+    public abstract class ArrowBase : MonoUpdateClass
     {
         [SerializeField] protected float _distanceToStick = 1;        
         protected IStickable _lastSticable;
@@ -17,7 +17,7 @@ namespace MonoUpdate
 
         public event Action<ArrowBase> OnUnStick = (arrow) => { };
 
-        public virtual void Awake()
+        protected virtual void Awake()
         {            
             _rigidbody = GetComponent<Rigidbody>();
         }

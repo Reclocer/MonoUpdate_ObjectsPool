@@ -24,8 +24,7 @@ namespace MonoUpdate
         public virtual void MonoFixedUpdateFunc()
         {
 
-        }
-       
+        }      
 
         //Logic
         public virtual void MonoUpdateFunc()
